@@ -1,5 +1,5 @@
 require 'bundler/setup'
-require 'sinatra'
+require 'sinatra/base'
 require 'sinatra/flash'
 require 'sinatra/contrib'
 require 'sinatra/cookies'
@@ -7,9 +7,25 @@ require 'zurb-foundation'
 require 'compass'
 require 'faker'
 
+class Protected < Sinatra::Base
+  register Sinatra::Flash
+  get '/' do
+    erb :digest_auth
+  end
+  def self.new(*)
+    app = Rack::Auth::Digest::MD5.new(super) do |username|
+      {'admin' => 'admin'}[username]
+    end
+    app.realm = 'Protected Area'
+    app.opaque = 'secretkey'
+    app
+  end
+end
+class Public < Sinatra::Base
 helpers Sinatra::Cookies
 set :cookie_options, :domain => nil
 enable :sessions, :logging
+  register Sinatra::Flash
 
 get '/' do
   erb :index
@@ -84,17 +100,23 @@ def get_mime_type_for(filename)
   end
 end
 
-def load_frame_get_actions
-  frame_elements = %w(top bottom left right middle)
-  frame_elements.each do |element|
-    frame_path = "frame_#{element}".to_sym
-    get "/frame_#{element}" do
-      erb frame_path, :layout => false
-    end
+  get '/frame_top' do
+    erb :frame_top, :layout => false
   end
+
+  get '/frame_bottom' do
+    erb :frame_bottom, :layout => false
+    end
+  get '/frame_left' do
+    erb :frame_left, :layout => false
+  end
+  get '/frame_right' do
+    erb :frame_right, :layout => false
 end
 
-load_frame_get_actions
+  get '/frame_middle' do
+    erb :frame_middle, :layout => false
+  end
 
 get '/nested_frames' do
   erb :nested_frames, :layout => false
@@ -464,4 +486,36 @@ end
 
 get '/exit_intent' do
   erb :exit_intent
+end
+
+get '/radio' do
+  erb :radio
+end
+
+get '/textinput' do
+  erb :textinput
+end
+
+get '/mouseclicks' do
+  erb :mouseclicks
+end
+
+get '/overlays' do
+  erb :overlays
+end
+
+get '/entry_ad' do
+  erb :entry_ad, locals: { dismissed_ad: session[:dismissed_ad] }
+end
+
+post '/entry_ad' do
+  session[:dismissed_ad] = !session[:dismissed_ad]
+end
+
+get '/add_remove_elements/:number_of_elements?' do
+  erb :add_remove_elements, locals: { number_of_elements: params[:number_of_elements].to_i }
+end
+  get '/inputs' do
+    erb :inputs
+  end
 end

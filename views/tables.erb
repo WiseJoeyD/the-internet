@@ -5,6 +5,21 @@ $(function(){
   $("#table2").tablesorter();
 });
 </script>
+<script type="text/javascript">
+    function tdChange(cell) {
+        cell.style.backgroundColor = "#FF0000"
+    }
+</script>
+<script type="text/javascript">
+    function trChange(cell) {
+        cell.style.backgroundColor = "#0000FF"
+    }
+</script>
+<script type="text/javascript">
+    function thChange(cell) {
+        cell.style.backgroundColor = "#00FF00"
+    }
+</script>
 <style>
   span {
     padding-right: 20px;
@@ -16,7 +31,11 @@ $(function(){
 </style>
 <div class="example">
   <h3>Data Tables</h3>
-  <p>Often times when you see a table it contains data which is sortable -- sometimes with actions that can be taken within each row (e.g. edit, delete). And it can be challenging to automate interaction with sets of data in a table depending on how it is constructed.</p>
+  <p>Often times when you see a table it contains data which is sortable -- sometimes with actions that can be taken
+    within each row (e.g. edit, delete). And it can be challenging to automate interaction with sets of data in a table
+    depending on how it is constructed.</p>
+  <p>Also included are two "plain" html tables. One which will change the cell colour depending on the location of the
+    click. The other presenting nested tables.</p>
 
   <h4>Example 1</h4>
   <p>No Class or ID attributes to signify groupings of rows and columns</p>
@@ -139,4 +158,203 @@ $(function(){
       </tr>
     </tbody>
   </table>
+  <h4>Simple HTML Table Example</h4>
+  <table class="w3-table-all" id="table3">
+    <tr>
+      <th onclick='thChange(this);'>Number</th>
+      <th onclick='thChange(this);'>First Name</th>
+    </tr>
+    <tr>
+      <td onclick='tdChange(this);'>1</td>
+      <td onclick='tdChange(this);'>Eric</td>
+    </tr>
+    <tr onclick='trChange(this);'>
+      <td>2</td>
+      <td>Jimi</td>
+    </tr>
+    <tr>
+      <td onclick='tdChange(this);'>3</td>
+      <td onclick='tdChange(this);'>Eric</td>
+    </tr>
+    <tr onclick='trChange(this);'>
+      <td>2</td>
+      <td>Eric</td>
+    </tr>
+    <tr>
+      <td onclick='tdChange(this);'>3</td>
+      <td onclick='tdChange(this);'>Eric</td>
+    </tr>
+  </table>
+
+  <h4>Nested HTML Table Example</h4>
+  <table class="w3-table-all" id="table4">
+    <caption>
+      <b>Guitar Heroes</b>
+    </caption>
+    <tr>
+      <th>Number</th>
+      <th>First Name</th>
+      <th colspan="2">Details</th>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>Eric</td>
+      <td>Clapton</td>
+      <td>
+        <label>
+          <input type="radio" name="group1" value="Milk"/> Milk
+        </label>
+        <label>
+          <input type="radio" name="group1" value="Cream" checked=""/> Cream
+        </label>
+      </td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>Jimi</td>
+      <td bgcolor="00F0F0">
+        <b>Hendrix</b>
+      </td>
+      <td>
+        <a href="https://en.wikipedia.org/wiki/Jimi_Hendrix"> Wiki </a> 
+      </td>
+    </tr>
+    <tr id="r3">
+      <td id="r3c1">3</td>
+      <td>Carlos</td>
+      <td>Santana</td>
+      <td>
+        <table border="1">
+          <tr>
+            <th rowspan="2">InnerSpan2</th>
+            <td>inner cell 1</td>
+          </tr>
+          <tr>
+            <td>inner cell 4</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+
+  <h4>Spanning table</h4>
+  <table id="spanTable">
+    <tbody>
+    <tr>
+      <td onclick='tdChange(this);' colspan="2" rowspan="2">2by2</td>
+      <td>1,3</td>
+      <td>1,4</td>
+      <td>1,5</td>
+      <td>1,6</td>
+    </tr>
+    <tr>
+      <td>2,3</td>
+      <td onclick="tdChange(this);" colspan="3" rowspan="3">3by3</td>
+    </tr>
+    <tr>
+      <td rowspan="3">1by3</td>
+      <td>3,2</td>
+      <td>3,3</td>
+    </tr>
+    <tr>
+      <td>4,2</td>
+      <td>4,3</td>
+    </tr>
+    <tr>
+      <td>5,2</td>
+      <td colspan="4">4by1</td>
+    </tr>
+    </tbody>
+  </table>
+
+  <h4>Spanning table</h4>
+  <table id="spanTable">
+    <tbody>
+    <tr>
+      <td onclick='tdChange(this);' colspan="2" rowspan="2">2by2</td>
+      <td>1,3</td>
+      <td>1,4</td>
+      <td>1,5</td>
+      <td>1,6</td>
+    </tr>
+    <tr>
+      <td>2,3</td>
+      <td onclick="tdChange(this);" colspan="3" rowspan="3">3by3</td>
+    </tr>
+    <tr>
+      <td rowspan="3">1by3</td>
+      <td>3,2</td>
+      <td>3,3</td>
+    </tr>
+    <tr>
+      <td>4,2</td>
+      <td>4,3</td>
+    </tr>
+    <tr>
+      <td>5,2</td>
+      <td colspan="4">4by1</td>
+    </tr>
+    </tbody>
+  </table>
+  
+  <h4>Nested HTML Table Example 2</h4>
+  <table class="w3-table-all" id="table6">
+    <caption>
+      <b>Guitar Heroes</b>
+    </caption>
+    <tr>
+      <th>Number</th>
+      <th>First Name</th>
+      <th colspan="2">Details</th>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>Eric</td>
+      <td>Clapton</td>
+      <td>
+        <label>
+          <input type="radio" name="group1" value="Milk"/> Milk
+        </label>
+        <label>
+          <input type="radio" name="group1" value="Cream" checked=""/> Cream
+        </label>
+      </td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>Jimi</td>
+      <td bgcolor="00F0F0">
+        <b>Hendrix</b>
+      </td>
+      <td>
+        <a href="https://en.wikipedia.org/wiki/Jimi_Hendrix"> Wiki </a> <br> 
+		<a id="rockandroll" href="https://en.wikipedia.org/wiki/Rock_and_Roll_Hall_of_Fame"> Rock & Roll Hall of Fame </a>
+      </td>
+    </tr>
+    <tr id="r3">
+      <td id="r3c1">3</td>
+      <td>Carlos</td>
+      <td>Santana</td>
+      <td>
+        <table border="1">
+          <tr>
+            <th rowspan="2">InnerSpan2</th>
+            <td>inner cell 1</td>
+          </tr>
+          <tr>
+            <td>inner cell 4</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+	<tr id="r4">
+      <td id="r4c1">3</td>
+      <td>Guitar</td>
+      <td>Hero #4</td>
+      <td>
+        <button type="button" id="tableButton">Click Me!</button>
+      </td>
+    </tr>
+  </table>
+  
 </div>

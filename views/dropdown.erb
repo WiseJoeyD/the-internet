@@ -5,4 +5,45 @@
       <option value="1">Option 1</option>
       <option value="2">Option 2</option>
   </select>
+
+  <h3>Multi-select List</h3>
+  <select multiple id="multiselect" >
+    <option value="" disabled="disabled">Please select your options</option>
+    <option value="1">Option 1</option>
+    <option value="2">Option 2</option>
+    <option value="3">Option 3</option>
+    <option value="4">Option 4</option>
+    <option value="5">Option 5</option>
+    <option value="6">Option 6</option>
+  </select>
+
+  <h3>Dropdown list, preselected</h3>
+  <select id="dropdownChosen">
+    <option value="" disabled="disabled">Please select an option</option>
+    <option value="1" selected="selected">Option 1</option>
+    <option value="2">Option 2</option>
+  </select>
+
+  <h3>Multi-select List, preselected</h3>
+  <select multiple id="multiselectChosen" >
+    <option value="" disabled="disabled">Please select your options</option>
+    <option value="1" selected="selected">Option 1</option>
+    <option value="2">Option 2</option>
+    <option value="3" selected="selected">Option 3</option>
+    <option value="4">Option 4</option>
+    <option value="5" selected="selected">Option 5</option>
+    <option value="6">Option 6</option>
+  </select>
 </div>
+<script>
+  var dropdown = document.getElementById('dropdown');
+  dropdown.onchange = function(event) {
+    var options = dropdown.getElementsByTagName('option');
+    for (var i = 0; i < options.length; i++) {
+      options[i].removeAttribute('selected');
+    }
+    document
+      .querySelector(`#dropdown option[value='${event.target.value}']`)
+      .setAttribute('selected', 'selected');
+  };
+</script>
