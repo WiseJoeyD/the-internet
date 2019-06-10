@@ -1,0 +1,72 @@
+<div class="example">
+  <div onmousedown="return logMouse(event)" onmouseup="return logMouse(event)" onclick="return logMouse(event)" oncontextmenu="return logMouse(event)" ondblclick="return logMouse(event)" id="clickme">Click this text with one of your mouse buttons to return a number.
+    <p>
+      0 = The left mouse button<br>
+      1 = The middle mouse button<br>
+      2 = The right mouse button
+    </p>
+
+    <p><strong>Note:</strong> Internet Explorer 8, and earlier, returns another result:</p>
+
+    <p>
+      1 = The left mouse button<br>
+      4 = The middle mouse button<br>
+      2 = The right mouse button
+    </p>
+  </div>
+
+  <form>
+    <label>You pressed button:
+    <input disabled id="pressed">
+    </label>
+  </form>
+
+  <script>
+      function logMouse(event) {
+          document.getElementById('pressed').value = event.button;
+      }
+  </script>
+  
+  <h4>Double Click</h4>
+  <p>In some web apps use the double click command to provide additiona interactions and features</p>
+  <p>The table below tracks mouse clicks on the elements and displays them .</p>
+
+<a href="javascript:void(null)" class="page" onmousedown="return logIt('mousedown  ',event)" onmouseup="return logIt('mouseup    ',event)" onclick="return logIt('click      ',event)" oncontextmenu="return logIt('contextmenu',event)" ondblclick="return logIt('dblclick   ',event)">Click here to log mouse clicks</a><br>
+<a href="#" class="page" onclick="document.forms['testform'].elements[0].value ='';  lines=0; return false">Clear log</a>
+
+<script type="text/javascript">
+var lines= 0;
+var maxlines= 24;
+
+function showmesg(t)
+{
+   var old= document.forms['testform'].elements[0].value;
+   if (lines >= maxlines)
+   {
+   	var i= old.indexOf('\n');
+	if (i >= 0)
+	    old= old.substr(i+1);
+   }
+   else
+   	lines++;
+
+   document.forms['testform'].elements[0].value= old + t + '\n';
+}
+
+function logIt(evt,e)
+{
+    showmesg(evt+" which="+e.which+" button="+e.button+' buttons='+e.buttons);
+    if (e.preventDefault)
+	e.preventDefault();
+    else
+	e.returnValue= false;
+     return false;
+}
+</script>
+
+<form name="testform">
+<textarea style="width:  50%;height: 200px;"></textarea><p></p>
+
+</form>
+  
+</div>

@@ -11,6 +11,10 @@
 .figure:hover .figcaption {
   display: block;
 }
+.newFigure {
+  float: left;
+  padding-right: 20px;
+}
 </style>
 
 <div class="example">
@@ -18,11 +22,22 @@
   <p>Hover over the image for additional information</p>
   <% 3.times do |count| %>
   <div class="figure">
-    <img src="/img/avatar-blank.jpg" alt="User Avatar">
+        <img src="/img/avatar-blank.jpg" alt="User Avatar" id="image<%= count+1 %>">
     <div class="figcaption">
       <h5>name: user<%= count+1 %></h5>
       <a href="/users/<%= count+1 %>">View profile</a>
     </div>
   </div>
+  <% end %>
+  <p style="clear: both"> </p>
+  <p style="clear: both">More hovers that use the onmousehover() function rather than css :hover</p>
+  <% 3.times do |count| %>
+      <div class="newFigure">
+        <img src="/img/avatar-blank.jpg" alt="User Avatar" id="image<%= count+10 %>" onmouseover="document.getElementById('caption<%= count+10 %>').style.display = 'block'" onmouseout="document.getElementById('caption<%= count+10 %>').style.display = 'none'">
+        <div class="figcaption" id="caption<%= count+10 %>">
+          <h5>name: user<%= count+10 %></h5>
+          <a id="profile<%= count+10 %>" href="/users/<%= count+10 %>">View profile</a>
+        </div>
+      </div>
   <% end %>
 </div>
